@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class WhoseTurnApplication
 
 fun main(args: Array<String>) {
-	runApplication<WhoseTurnApplication>(*args)
+    runApplication<WhoseTurnApplication>(*args)
 }
