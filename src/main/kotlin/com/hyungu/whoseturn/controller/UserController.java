@@ -14,6 +14,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello,World!";
+    }
+
     @PostMapping
     public UserModel addMember(@RequestBody UserModel userModel) {
         System.out.println("run PostMapping ++++++++++++");
