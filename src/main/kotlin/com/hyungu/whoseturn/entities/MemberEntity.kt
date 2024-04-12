@@ -9,7 +9,7 @@ import lombok.Setter
 @Entity(name = "Member")
 @Getter
 @Setter
-class MemberEntity(
+data class MemberEntity(
     @Id
     @GeneratedValue
     var id: Long? = null,

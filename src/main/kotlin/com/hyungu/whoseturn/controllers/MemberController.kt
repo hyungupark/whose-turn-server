@@ -23,8 +23,8 @@ class MemberController(private val memberRepository: MemberRepository) {
 
     @PutMapping("/{id}")
     fun updateUser(@PathVariable id: Long, @RequestBody newMember: MemberEntity): ResponseEntity<MemberEntity> =
-        memberRepository.findById(id).map {
-            val updatedMember: MemberEntity = newMember
+        memberRepository.findById(id).map { member ->
+            val updatedMember: MemberEntity = member.copy(id = newMember.id, name = newMember.name)
             ResponseEntity.ok().body(memberRepository.save(updatedMember))
         }.orElse(ResponseEntity.notFound().build())
 
