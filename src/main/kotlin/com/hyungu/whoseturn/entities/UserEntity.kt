@@ -7,12 +7,12 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import lombok.Data
 
-@Entity(name = "user_table")
+@Entity(name = "users")
 @Data
 data class UserEntity(
     @Id
     @GeneratedValue
-    val id: Long? = null,
+    val id: Long?,
 
     var name: String,
 
@@ -24,4 +24,3 @@ data class UserEntity(
     @Nullable
     var comments: List<CommentEntity>?
 )
-

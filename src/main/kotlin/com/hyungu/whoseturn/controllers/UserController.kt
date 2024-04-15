@@ -10,64 +10,81 @@ import java.util.Optional
 
 @RestController
 @RequestMapping("/users")
-class MemberController(private val userRepository: UserRepository) {
+class UserController(private val userRepository: UserRepository) {
 
+    // Get
     @GetMapping
-    fun getAllMembers(): List<UserEntity> = userRepository.findAll()
-
-    @PostMapping
-    fun createMember(@RequestBody user: UserEntity): UserEntity = userRepository.save(user)
+    fun getAllUsers(): List<UserEntity> = userRepository.findAll()
 
     @GetMapping("/{id}")
-    fun getMemberById(@PathVariable id: Long): ResponseEntity<UserEntity> =
-        userRepository.findById(id).map { user -> ResponseEntity.ok(user) }
+    fun getUserById(@PathVariable id: Long): ResponseEntity<UserEntity> =
+        userRepository
+            .findById(id)
+            .map { user -> ResponseEntity.ok(user) }
             .orElse(ResponseEntity.notFound().build())
 
-    @PutMapping("/{id}")
-    fun updateMember(@PathVariable id: Long, @RequestBody newUser: UserEntity): ResponseEntity<UserEntity> =
-        userRepository.findById(id).map { user ->
-            val updatedMember: UserEntity = user.copy(id = newUser.id, name = newUser.name)
-            ResponseEntity.ok().body(userRepository.save(updatedMember))
-        }.orElse(ResponseEntity.notFound().build())
+    // Post
+    @PostMapping
+    fun createUser(@RequestBody user: UserEntity): UserEntity = userRepository.save(user)
 
+
+    // Put
+    @PutMapping("/{id}")
+    fun updateUser(@PathVariable id: Long, @RequestBody newUser: UserEntity): ResponseEntity<UserEntity> =
+        userRepository
+            .findById(id)
+            .map { user ->
+                val updatedMember: UserEntity = user.copy(id = newUser.id, name = newUser.name)
+                ResponseEntity.ok().body(userRepository.save(updatedMember))
+            }
+            .orElse(ResponseEntity.notFound().build())
+
+    // Delete
     @DeleteMapping("/{id}")
-    fun deleteMember(@PathVariable id: Long): ResponseEntity<Void> =
-        userRepository.findById(id).map { user ->
-            userRepository.delete(user)
-            ResponseEntity<Void>(HttpStatus.NO_CONTENT)
-        }.orElse(ResponseEntity.notFound().build())
+    fun deleteUser(@PathVariable id: Long): ResponseEntity<Void> =
+        userRepository
+            .findById(id)
+            .map { user ->
+                userRepository.delete(user)
+                ResponseEntity<Void>(HttpStatus.NO_CONTENT)
+            }
+            .orElse(ResponseEntity.notFound().build())
 
 }
 
 @RestController
 @RequestMapping("/crud/users")
-class MemberCrudController(private val userCrudRepository: UserCrudRepository) {
+class UserCrudController(private val userCrudRepository: UserCrudRepository) {
 
+    // Get
     @GetMapping
-    fun getAllMembers(): Iterable<UserEntity> = userCrudRepository.findAll()
+    fun getAllUsers(): Iterable<UserEntity> = userCrudRepository.findAll()
 
     @GetMapping("/{id}")
-    fun getMemberById(@PathVariable id: Long): Optional<UserEntity> {
+    fun getUserById(@PathVariable id: Long): Optional<UserEntity> {
         return userCrudRepository.findById(id);
     }
 
+    // Post
     @PostMapping
-    fun postMember(@RequestBody user: UserEntity): UserEntity = userCrudRepository.save(user)
+    fun postUser(@RequestBody user: UserEntity): UserEntity = userCrudRepository.save(user)
 
+    // Put
     @PutMapping("/{id}")
-    fun putMember(@PathVariable id: Long, @RequestBody user: UserEntity): ResponseEntity<UserEntity> =
+    fun putUser(@PathVariable id: Long, @RequestBody user: UserEntity): ResponseEntity<UserEntity> =
         if (userCrudRepository.existsById(id))
-            ResponseEntity<UserEntity>(
-                userCrudRepository.save(user),
-                HttpStatus.CREATED
-            )
-        else
             ResponseEntity<UserEntity>(
                 userCrudRepository.save(user),
                 HttpStatus.OK
             )
+        else
+            ResponseEntity<UserEntity>(
+                userCrudRepository.save(user),
+                HttpStatus.CREATED
+            )
 
+    // Delete
     @DeleteMapping("/{id}")
-    fun deleteMember(@PathVariable id: Long) = userCrudRepository.deleteById(id)
+    fun deleteUser(@PathVariable id: Long) = userCrudRepository.deleteById(id)
 
 }

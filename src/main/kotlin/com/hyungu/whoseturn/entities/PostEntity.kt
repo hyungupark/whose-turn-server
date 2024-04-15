@@ -7,12 +7,12 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import lombok.Data
 
-@Entity
+@Entity(name = "posts")
 @Data
 data class PostEntity(
     @Id
     @GeneratedValue
-    val id: Long,
+    val id: Long?,
 
     var title: String,
 

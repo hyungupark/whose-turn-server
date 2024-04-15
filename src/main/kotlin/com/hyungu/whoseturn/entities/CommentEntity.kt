@@ -6,12 +6,12 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import lombok.Data
 
-@Entity
+@Entity(name = "comments")
 @Data
 data class CommentEntity(
     @Id
     @GeneratedValue
-    val id: Long,
+    val id: Long?,
 
     var content: String,
 
