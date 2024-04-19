@@ -14,5 +14,5 @@ data class RoomUserEntity(
     @JoinColumn(name = "id", table = "users")
     val userId: String,
 
-    var name: String,
+    var name: String
 )

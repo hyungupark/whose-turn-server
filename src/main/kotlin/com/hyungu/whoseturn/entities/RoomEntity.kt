@@ -15,6 +15,6 @@ data class RoomEntity(
 
     @ManyToMany
     @JoinTable(name = "room_user")
-    var users: List<UserEntity>,
+    var users: List<UserEntity>
 )
 
