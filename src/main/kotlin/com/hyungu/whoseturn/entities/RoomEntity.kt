@@ -4,6 +4,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
 
@@ -15,6 +16,7 @@ data class RoomEntity(
 
     @ManyToMany
     @JoinTable(name = "room_user")
+    @JoinColumn(name = "id", referencedColumnName = "room_id")
     var users: List<UserEntity>
 )
 
