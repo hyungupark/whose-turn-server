@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "rooms")
+@Table(name = "ROOMS")
 public class RoomEntity {
 
     @Id
@@ -13,8 +13,8 @@ public class RoomEntity {
     @Column(name = "ROOM_ID", nullable = false)
     private String id;
 
-    @ManyToMany(mappedBy = "rooms")
-    private List<UserEntity> users;
+    @ManyToMany(mappedBy = "ROOM_ID")
+    private List<RoomUserEntity> roomUsers;
 
     public RoomEntity() {
     }

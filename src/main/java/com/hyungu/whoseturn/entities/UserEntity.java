@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "USERS")
 public class UserEntity {
 
     @Id
@@ -14,16 +14,11 @@ public class UserEntity {
     @Column(name = "MEMBER_ID", nullable = false)
     private String id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ROOM_MEMBER",
-            joinColumns = @JoinColumn(name = "MEMBERID"),
-            inverseJoinColumns = @JoinColumn(name = "ROOM_ID")
-    )
-    private List<RoomEntity> rooms = new ArrayList<>();
+    @OneToMany(mappedBy = "USER_ID")
+    private List<RoomUserEntity> roomUseris;
 
     public UserEntity() {
     }
