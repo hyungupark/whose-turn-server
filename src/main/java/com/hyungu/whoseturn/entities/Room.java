@@ -2,22 +2,19 @@ package com.hyungu.whoseturn.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ROOMS")
-public class RoomEntity {
+public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "ROOM_ID", nullable = false)
+    @Column(name = "room_id", nullable = false)
     private String id;
 
-    @ManyToMany(mappedBy = "ROOM_ID")
-    private List<RoomUserEntity> roomUsers;
-
-    public RoomEntity() {
-    }
+    @OneToMany(mappedBy = "room")
+    private List<RoomMember> roomMembers = new ArrayList<RoomMember>();
 
     // getter
     public String getId() {
