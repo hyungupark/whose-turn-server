@@ -3,41 +3,52 @@ package com.hyungu.whoseturn.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "members")
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "member_id", nullable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "member_name", nullable = false)
-    private String memberName;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(mappedBy = "member")
-    private List<RoomMember> rooms = new ArrayList<RoomMember>();
+    @ManyToMany
+    @JoinTable(
+            name = "room_member",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id")
+    )
+    private Set<Room> rooms = new HashSet<Room>();
 
-    public Member() {
-    }
-
-    public Member(String name) {
-        this.memberName = name;
-    }
-
-    // getter
-    public String getId() {
+    // Getter, Setter
+    public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return memberName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    // setter
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
-        this.memberName = name;
+        this.name = name;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 
 }
