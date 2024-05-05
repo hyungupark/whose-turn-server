@@ -16,6 +16,10 @@ public class Room {
     @Column(name = "name")
     private String name;
 
+    @OneToOne
+    @JoinColumn(name = "admin", nullable = false)
+    private Member admin;
+
     @ManyToMany(mappedBy = "rooms")
     private Set<Member> members = new HashSet<Member>();
 
@@ -34,6 +38,14 @@ public class Room {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Member getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Member admin) {
+        this.admin = admin;
     }
 
     public Set<Member> getMembers() {
