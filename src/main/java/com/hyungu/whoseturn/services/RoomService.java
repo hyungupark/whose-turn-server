@@ -18,12 +18,12 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public Room saveRoom(Room room) {
-        return roomRepository.save(room);
-    }
-
     public Optional<Room> getRoomById(Long id) {
         return roomRepository.findById(id);
+    }
+
+    public Room saveRoom(Room room) {
+        return roomRepository.save(room);
     }
 
     public void deleteRoom(Long id) {
