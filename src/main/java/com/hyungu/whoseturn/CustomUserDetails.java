@@ -7,14 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomMemberDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
     private final Member member;
 
     public Member getMember() {
         return member;
     }
 
-    public CustomMemberDetails(Member member) {
+    public CustomUserDetails(Member member) {
         this.member = member;
     }
 
