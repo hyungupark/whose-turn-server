@@ -1,7 +1,6 @@
 package com.hyungu.whoseturn;
 
 import com.hyungu.whoseturn.entities.Member;
-import com.hyungu.whoseturn.repositories.MemberRepository;
 import com.hyungu.whoseturn.services.MemberService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
